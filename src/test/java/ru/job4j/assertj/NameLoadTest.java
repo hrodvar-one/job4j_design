@@ -46,4 +46,43 @@ class NameLoadTest {
                 /*проверяем наличие конкретного слова в сообщении:*/
                 .hasMessageContaining("name");
     }
+
+    @Test
+    void  checkWhatNamesArrayIsEmpty() {
+        NameLoad nameLoad = new NameLoad();
+        var words = new String[0];
+        assertThatThrownBy(() -> nameLoad.parse(words))
+                /*проверяем класс исключения: */
+                .isInstanceOf(IllegalArgumentException.class)
+                /*с помощью регулярного выражения проверяем факт наличия сообщения*/
+                .hasMessageMatching("^.+")
+                /*проверяем наличие конкретного слова в сообщении:*/
+                .hasMessageContaining("empty");
+    }
+
+    @Test
+    void  checkWhatNameStartsWithEquals() {
+        NameLoad nameLoad = new NameLoad();
+        var words = new String[]{"=test", "=test2"};
+        assertThatThrownBy(() -> nameLoad.parse(words))
+                /*проверяем класс исключения: */
+                .isInstanceOf(IllegalArgumentException.class)
+                /*с помощью регулярного выражения проверяем факт наличия сообщения*/
+                .hasMessageMatching("^.+")
+                /*проверяем наличие конкретного слова в сообщении:*/
+                .hasMessageContaining("does not contain a key");
+    }
+
+    @Test
+    void  checkWhatNameEndsWithEquals() {
+        NameLoad nameLoad = new NameLoad();
+        var words = new String[]{"test=", "test2="};
+        assertThatThrownBy(() -> nameLoad.parse(words))
+                /*проверяем класс исключения: */
+                .isInstanceOf(IllegalArgumentException.class)
+                /*с помощью регулярного выражения проверяем факт наличия сообщения*/
+                .hasMessageMatching("^.+")
+                /*проверяем наличие конкретного слова в сообщении:*/
+                .hasMessageContaining("does not contain a value");
+    }
 }
