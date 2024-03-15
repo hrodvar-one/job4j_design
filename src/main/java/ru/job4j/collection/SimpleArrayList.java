@@ -85,7 +85,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         };
     }
 
-    public void extendArray() {
+    private void extendArray() {
         container = Arrays.copyOf(container, container.length * 2);
     }
 }
