@@ -17,12 +17,12 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
-        if ((float) count / capacity >= LOAD_FACTOR) {
+        if (count >= LOAD_FACTOR * capacity) {
             expand();
         }
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = indexForKey(key);
         if (table[index] == null) {
-            table[indexFor(hash(Objects.hashCode(key)))] = new MapEntry<>(key, value);
+            table[index] = new MapEntry<>(key, value);
             modCount++;
             count++;
             result = true;
@@ -45,18 +45,27 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         count = 0;
         for (MapEntry<K, V> entry : tmp) {
             if (entry != null) {
-                int index = indexFor(hash(Objects.hashCode(entry.key)));
+                int index = indexForKey(entry.key);
                 table[index] = entry;
             }
         }
     }
 
+    private int indexForKey(K key) {
+        return indexFor(hash(Objects.hashCode(key)));
+    }
+
+    private boolean keyComparison(K key) {
+        int index = indexForKey(key);
+        return Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key);
+    }
+
     @Override
     public V get(K key) {
         V result = null;
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = indexForKey(key);
         if (table[index] != null) {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
+            if (keyComparison(key)) {
                 result = table[index].value;
             }
         }
@@ -66,9 +75,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = indexForKey(key);
         if (table[index] != null) {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
+            if (keyComparison(key)) {
                 table[index].value = null;
                 table[index] = null;
                 modCount++;
