@@ -42,11 +42,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         MapEntry<K, V>[] tmp = table;
         capacity *= 2;
         table = new MapEntry[capacity];
-        count = 0;
         for (MapEntry<K, V> entry : tmp) {
             if (entry != null) {
-                int index = indexForKey(entry.key);
-                table[index] = entry;
+                table[indexForKey(entry.key)] = entry;
             }
         }
     }
