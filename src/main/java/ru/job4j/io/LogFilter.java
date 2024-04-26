@@ -3,7 +3,6 @@ package ru.job4j.io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LogFilter {
@@ -14,9 +13,13 @@ public class LogFilter {
     }
 
     public List<String> filter() {
-        List<String> lines = new ArrayList<>();
+        List<String> lines = List.of();
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
-            lines = input.lines().filter(s -> s.matches(".*404\\b\\s+\\w.*")).toList();
+            lines = input.lines()
+                    .map(s -> s.split(" "))
+                    .filter(s -> s[s.length -2].equals("404"))
+                    .map(s -> String.join(" ", s))
+                    .toList();
         } catch (IOException e) {
             e.printStackTrace();
         }
