@@ -28,11 +28,10 @@ public class LogFilter {
 
     public void saveTo(String out) {
         var data = filter();
-        try (PrintWriter output = new PrintWriter(
-                new BufferedOutputStream(
-                        new FileOutputStream(out)
-                ))) {
-            output.println(data);
+        try (PrintWriter output = new PrintWriter(new BufferedOutputStream(new FileOutputStream(out)))) {
+            for (String line : data) {
+                output.println(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
