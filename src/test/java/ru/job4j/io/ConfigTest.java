@@ -23,8 +23,32 @@ class ConfigTest {
     }
 
     @Test
-    void whenPairWithViolationOfThePattern() {
-        String path = "./data/pair_with_violation_of_the_pattern.properties";
+    void whenPairWithEmptyKey() {
+        String path = "./data/pair_with_empty_key.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairWithEmptyValue() {
+        String path = "./data/pair_with_empty_value.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairWithoutEqualsSign() {
+        String path = "./data/pair_without_equals_sign.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenPairWithOnlyEqualsSign() {
+        String path = "./data/pair_with_only_equals_sign.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);
