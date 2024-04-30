@@ -20,7 +20,7 @@ public class Analysis {
                     } else if (("200").equals(status) || ("300").equals(status)) {
                         if (start != null) {
                             end = time;
-                            out.println(start + " " + end);
+                            out.println(start + ";" + end + ";");
                             start = null;
                         }
                     }
