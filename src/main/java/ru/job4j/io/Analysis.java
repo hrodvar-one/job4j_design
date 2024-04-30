@@ -9,7 +9,7 @@ public class Analysis {
                 String start = null;
                 String end = null;
                 String line = input.readLine();
-                while (line!= null) {
+                while (line != null) {
                     String[] words = line.split(" ");
                     String status = words[0];
                     String time = words[1];
@@ -26,7 +26,7 @@ public class Analysis {
                     }
                     line = input.readLine();
                 }
-                if (start!= null) {
+                if (start != null) {
                     out.println(start + ";" + end + ";");
                 }
             }
