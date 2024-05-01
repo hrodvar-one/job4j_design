@@ -9,7 +9,9 @@ public class Analysis {
                 String start = null;
                 String end = null;
                 String line = input.readLine();
+                StringBuilder builder;
                 while (line != null) {
+                    builder = new StringBuilder();
                     String[] words = line.split(" ");
                     String status = words[0];
                     String time = words[1];
@@ -20,14 +22,15 @@ public class Analysis {
                     } else if (("200").equals(status) || ("300").equals(status)) {
                         if (start != null) {
                             end = time;
-                            out.println(start + ";" + end + ";");
+                            out.println(builder.append(start).append(";").append(end).append(";"));
                             start = null;
                         }
                     }
                     line = input.readLine();
                 }
+                builder = new StringBuilder();
                 if (start != null) {
-                    out.println(start + ";" + end + ";");
+                    out.println(builder.append(start).append(";").append(end).append(";"));
                 }
             }
         } catch (IOException e) {
