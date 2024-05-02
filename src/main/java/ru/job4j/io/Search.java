@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,13 +25,14 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
         }
-        if (args.length > 2) {
-            throw new IllegalArgumentException("Too many arguments. Should be 2.");
+        File file = new File(args[0]);
+        if (args.length != 2) {
+            throw new IllegalArgumentException("There must be two arguments.");
         }
-        if (!".".equals(args[0])) {
-            throw new IllegalArgumentException("Invalid root folder. Usage  ROOT_FOLDER.");
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException("The specified path is not a directory.");
         }
-        if (!".js".equals(args[1])) {
+        if (!args[1].matches("^\\..+")) {
             throw new IllegalArgumentException("Incorrect file extension " + args[1]);
         }
     }
