@@ -21,10 +21,7 @@ public class Search {
         return searcher.getPaths();
     }
 
-    public static void validateArgs(String[] args) throws IOException {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
-        }
+    private static void validateArgs(String[] args) throws IOException {
         File file = new File(args[0]);
         if (args.length != 2) {
             throw new IllegalArgumentException("There must be two arguments.");
