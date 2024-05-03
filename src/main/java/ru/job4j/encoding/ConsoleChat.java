@@ -40,6 +40,7 @@ public class ConsoleChat {
                         stopTrigger = false;
                     }
                     break;
+                default:
             }
             if (!stopTrigger) {
                 List<String> phrases = readPhrases();
