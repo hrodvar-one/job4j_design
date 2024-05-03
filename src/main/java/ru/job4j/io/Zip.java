@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import java.nio.file.Files;
 
 public class Zip {
 
@@ -31,15 +30,10 @@ public class Zip {
     public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(target))) {
             for (Path path : sources) {
-                out.putNextEntry(new ZipEntry(path.toString().replace("\\", "/")));
-                try (InputStream in = Files.newInputStream(path)) {
-                    byte[] buffer = new byte[1024];
-                    int len;
-                    while ((len = in.read(buffer)) > 0) {
-                        out.write(buffer, 0, len);
-                    }
+                out.putNextEntry(new ZipEntry(path.toString()));
+                try (BufferedInputStream output = new BufferedInputStream(new FileInputStream(path.toFile()))) {
+                    out.write(output.readAllBytes());
                 }
-                out.closeEntry();
             }
         } catch (IOException e) {
             e.printStackTrace();
