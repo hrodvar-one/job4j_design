@@ -12,8 +12,9 @@ public class Zip {
     private static void write(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int len;
-        while ((len = in.read(buffer)) >= 0)
+        while ((len = in.read(buffer)) >= 0) {
             out.write(buffer, 0, len);
+        }
         in.close();
     }
 
@@ -25,8 +26,7 @@ public class Zip {
                 write(new FileInputStream(path.toFile()), out);
             }
             out.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
