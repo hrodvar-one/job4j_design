@@ -23,10 +23,13 @@ public class ConsoleChat {
 
     public void run() {
         boolean stopTrigger = false;
+        List<String> phrases = readPhrases();
+        Random random = new Random();
+        String userInput = "";
         label:
-        while (true) {
+        while (!"OUT".equals(userInput)) {
             Scanner input = new Scanner(System.in);
-            String userInput = input.nextLine();
+            userInput = input.nextLine();
             log.add(userInput);
             switch (userInput) {
                 case OUT:
@@ -43,8 +46,6 @@ public class ConsoleChat {
                 default:
             }
             if (!stopTrigger) {
-                List<String> phrases = readPhrases();
-                Random random = new Random();
                 int randomIndex = random.nextInt(phrases.size());
                 String randomString = phrases.get(randomIndex);
                 System.out.println(randomString);
