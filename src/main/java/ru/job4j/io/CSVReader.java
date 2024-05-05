@@ -1,10 +1,7 @@
 package ru.job4j.io;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.*;
-import java.io.File;
 
 public class CSVReader {
 
@@ -25,12 +22,14 @@ public class CSVReader {
         String output = argsName.get("out");
         String[] filters = argsName.get("filter").split(",");
         ArrayList<String> lines = new ArrayList<>();
-        Scanner scanner = new Scanner(new FileInputStream(file));
 
-        while (scanner.hasNext()) {
-            lines.add(scanner.nextLine());
+        try (Scanner scanner = new Scanner(new FileInputStream(file))) {
+            while (scanner.hasNext()) {
+                lines.add(scanner.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        scanner.close();
 
         ArrayList<String> list = new ArrayList<>();
         int index;
@@ -58,11 +57,13 @@ public class CSVReader {
                 System.out.println(line);
             }
         } else {
-            PrintStream printStream = new PrintStream(new FileOutputStream(output));
-            for (String line : list) {
-                printStream.println(line);
+            try (PrintStream printStream = new PrintStream(new FileOutputStream(output))) {
+                for (String line : list) {
+                    printStream.println(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            printStream.close();
         }
     }
 
