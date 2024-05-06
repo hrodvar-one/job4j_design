@@ -10,8 +10,7 @@ public class EchoServer {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream output = socket.getOutputStream();
-                     BufferedReader input = new BufferedReader(
-                             new InputStreamReader(socket.getInputStream()))) {
+                     BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
                     if (input.readLine().contains("/?msg=Bye")) {
                         server.close();
                     }

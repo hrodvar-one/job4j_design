@@ -2,7 +2,7 @@ package ru.job4j.io.objectstream;
 
 import java.io.Serializable;
 
-public class Car implements Serializable{
+public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
