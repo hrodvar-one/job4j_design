@@ -14,7 +14,7 @@ public class UsageLog4j {
         long l = 0xffffffffL;
         char c = 'a';
         float f = .25f;
-        double d =.00001234;
+        double d = .00001234;
         boolean bool = true;
         LOG.debug("age : {}, b : {}, s : {}, l : {}, c : {}, f : {}, d : {}, bool : {}", age, b, s, l, c, f, d, bool);
     }
