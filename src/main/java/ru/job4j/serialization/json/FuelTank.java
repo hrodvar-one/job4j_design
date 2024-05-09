@@ -7,6 +7,10 @@ public class FuelTank {
         this.capacity = capacity;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     @Override
     public String toString() {
         return "FuelTank{"

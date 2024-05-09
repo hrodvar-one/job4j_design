@@ -1,52 +1,56 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        final Person person = new Person(false, 30, new Contact("11-111"),
-                new String[] {"Worker", "Married"});
 
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(person));
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
 
-        final String personJson =
-                "{"
-                        + "\"sex\":false,"
-                        + "\"age\":35,"
-                        + "\"contact\":"
-                        + "{"
-                        + "\"phone\":\"+7(924)111-111-11-11\""
-                        + "},"
-                        + "\"statuses\":"
-                        + "[\"Student\",\"Free\"]"
-                        + "}";
+        List<String> list = new ArrayList<>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);
 
-        final Person personMod = gson.fromJson(personJson, Person.class);
-        System.out.println(personMod);
+        final Person person = new Person(false, 30,
+                new Contact("11-111"),
+                new String[] {"Worker", "Married"}
+        );
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sex", person.getSex());
+        jsonObject.put("age", person.getAge());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("statuses", jsonStatuses);
+
+        System.out.println(jsonObject.toString());
+
+        System.out.println(new JSONObject(person).toString());
 
         System.out.println("--------------- My example ---------------");
 
-        final Car car = new Car(false, 1999, new FuelTank(60),
-                new String[] {"On repair", "On sale"});
+        JSONObject jsonFueltank = new JSONObject("{\"capacity\":\"90\"}");
 
-        final Gson gson2 = new GsonBuilder().create();
-        System.out.println(gson2.toJson(car));
+        List<String> listMyExample = new ArrayList<>();
+        listMyExample.add("Student");
+        listMyExample.add("Free");
+        JSONArray jsonMyStatuses = new JSONArray(listMyExample);
 
-        final String carJson =
-                "{"
-                        + "\"isDiesel\":true,"
-                        + "\"yearOfManufacture\":2020,"
-                        + "\"fuelTank\":"
-                        + "{"
-                        + "\"capacity\":\"80\""
-                        + "},"
-                        + "\"statuses\":"
-                        + "[\"Broken\",\"Sold\"]"
-                        + "}";
+        final Car car = new Car(false, 1999,
+                new FuelTank(60),
+                new String[] {"Broken", "Sold"}
+        );
+        JSONObject jsonMyObject = new JSONObject();
+        jsonMyObject.put("isDiesel", car.getIsDiesel());
+        jsonMyObject.put("yearOfManufacture", car.getYearOfManufacture());
+        jsonMyObject.put("fuelTank", jsonFueltank);
+        jsonMyObject.put("statuses", jsonMyStatuses);
 
-        final Car carMod = gson2.fromJson(carJson, Car.class);
-        System.out.println(carMod);
+        System.out.println(jsonMyObject.toString());
+
+        System.out.println(new JSONObject(car).toString());
     }
 }

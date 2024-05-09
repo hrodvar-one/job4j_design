@@ -15,6 +15,22 @@ public class Car {
         this.statuses = statuses;
     }
 
+    public boolean getIsDiesel() {
+        return isDiesel;
+    }
+
+    public int getYearOfManufacture() {
+        return yearOfManufacture;
+    }
+
+    public FuelTank getFuelTank() {
+        return fuelTank;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
+    }
+
     @Override
     public String toString() {
         return "Car{"
