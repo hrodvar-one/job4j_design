@@ -1,0 +1,1 @@
+insert into country(na, size, population) values('Россия', 17125191, 146150789);
