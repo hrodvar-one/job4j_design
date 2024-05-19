@@ -163,18 +163,18 @@ or replace function add_name_price_date_in_history_of_price()
      returns trigger as
 $$
     BEGIN
-        insert into history_of_price (name, price, date)
-        values (new.name, new.price, now());
+        INSERT INTO history_of_price (name, price, date)
+        VALUES (NEW.name, NEW.price, CURRENT_TIMESTAMP);
         return new;
     END;
 $$
 LANGUAGE 'plpgsql';
 
 -- создаём триггер trigger_add_name_price_date_in_history_of_price
-create trigger trigger_add_name_price_date_in_history_of_price
+    create trigger trigger_add_name_price_date_in_history_of_price
     after insert
     on products
-    for each statement
+    for each row
     execute procedure add_name_price_date_in_history_of_price();
 
 -- вставляем данные в таблицу products для проверки trigger_add_tax_before_insert_for_row
