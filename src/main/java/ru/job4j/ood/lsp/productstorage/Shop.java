@@ -19,7 +19,7 @@ public class Shop extends AbstractStore {
         long daysSpent = ChronoUnit.DAYS.between(food.getCreateDate(), LocalDate.now());
         double spentPercentage = (double) daysSpent / shelfLife;
         if (spentPercentage > 0.75 && spentPercentage < 1) {
-            food.setDiscount(20); // Применяем скидку 20%
+            food.setDiscount(20);
         }
         super.add(food);
     }
