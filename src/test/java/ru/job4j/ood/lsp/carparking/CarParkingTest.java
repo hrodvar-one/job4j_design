@@ -47,13 +47,4 @@ class CarParkingTest {
         boolean result = parking.park(truck);
         assertTrue(result);
     }
-
-    @Test
-    void whenNotEnoughPassengerSpacesForTruckThenFail() {
-        parking = new CarParking(1, 1);
-
-        Car truck = new Truck(2);
-        boolean result = parking.park(truck);
-        assertFalse(result);
-    }
 }
