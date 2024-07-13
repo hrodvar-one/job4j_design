@@ -12,4 +12,9 @@ public class Warehouse extends AbstractStore {
         double spentPercentage = (double) daysSpent / shelfLife;
         return spentPercentage < 0.25;
     }
+
+    @Override
+    public void clear() {
+        storage.clear();
+    }
 }

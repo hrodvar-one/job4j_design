@@ -14,6 +14,11 @@ public class Shop extends AbstractStore {
     }
 
     @Override
+    public void clear() {
+        storage.clear();
+    }
+
+    @Override
     public void add(Food food) {
         long shelfLife = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
         long daysSpent = ChronoUnit.DAYS.between(food.getCreateDate(), LocalDate.now());
