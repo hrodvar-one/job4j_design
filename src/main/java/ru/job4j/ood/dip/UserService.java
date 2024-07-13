@@ -1,6 +1,7 @@
 package ru.job4j.ood.dip;
 
 public class UserService {
+
     private ConsoleLogger logger;
 
     public UserService() {
